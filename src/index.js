@@ -1,15 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom'
+import YTSearch from 'youtube-api-search'
+import SearchBar from './components/search_bar'
 
-import App from './components/app';
-import reducers from './reducers';
+const YOUTUBE_API_KEY = 'AIzaSyBi-tUrrZWDY9Q7rMgbC-IuvJXrX-kbwL4'
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+YTSearch({key: YOUTUBE_API_KEY, term: 'runescape'}, function(data) {
+  console.log(data)
+})
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
+class App extends Component {
+
+  render() {
+  return (
+    <div>
+      <SearchBar />
+    </div>
+    )
+
+  }
+}
+
+
+
+ReactDOM.render(<App />, document.getElementById('root'))
