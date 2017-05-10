@@ -9,20 +9,13 @@ class SearchBar extends Component {
     }
   }
 
-  submitStuff = () => {
-    console.log("hey")
-  }
-
 
   render() {
     return(
-        <div>
+        <div className="search-bar">
           <input 
-          onSubmit={this.submitStuff}
           value={this.state.inputValue}
           onChange={event => {this.setState({inputValue: event.target.value})}}/>
-          <br/>
-          Value of the input: {this.state.inputValue}
         </div>
     )
   }
