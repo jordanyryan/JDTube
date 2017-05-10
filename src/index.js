@@ -14,28 +14,30 @@ class App extends Component {
       videos: [],
       currentVideo: null
     }
+    this.videoSearch('breaking bad')
+    
+  }
 
-    YTSearch({key: YOUTUBE_API_KEY, term: 'Breaking Bad'}, videos => {
-    this.setState({ 
-      videos: videos, 
-      currentVideo: videos[0] 
-    })
-
+  videoSearch(input) {
+    YTSearch({key: YOUTUBE_API_KEY, term: input}, videos => {
+      this.setState({ 
+        videos: videos, 
+        currentVideo: videos[0] 
+      })
     })
   }
 
-  onListClick = (e) => {
-
+  selectVideo(video) {
+    this.setState({currentVideo: video})
   }
 
   render() {
-    console.log(this.state.videos)
   return (
     <div>
-      <SearchBar />
+      <SearchBar onSearch={(input) => {this.videoSearch(input)}}/>
       <VideoDetail video={this.state.currentVideo} />
       <VideoList 
-      onVideoSelect={currentVideo => this.setState({currentVideo})}
+      onVideoSelect={currentVideo => {this.selectVideo(currentVideo)}}
       videos={this.state.videos}/>
     </div>
     )
